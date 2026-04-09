@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Davi Oliveira — Android Developer</title>
+    <!--
+    ============================================================
+    PORTFÓLIO — DAVI HENRIQUE SILVA DE OLIVEIRA
+    ============================================================
+    INSTRUÇÕES DE PERSONALIZAÇÃO:
+
+    1. INFORMAÇÕES PESSOAIS
+       - Busque por "EDIT:" nos comentários para localizar
+         rapidamente os campos editáveis.
+
+    2. COMO ADICIONAR NOVOS PROJETOS
+       - Vá até a seção "Projetos" (busque por "PROJECTS-SECTION").
+       - Copie o bloco <div class="project-card"> comentado.
+       - Preencha título, descrição, tecnologias e links.
+       - Descomente o bloco e ele aparecerá automaticamente no grid.
+
+    3. HOSPEDAGEM NO GITHUB PAGES
+       - Crie um repositório (ex: portfolio).
+       - Faça upload deste arquivo como index.html.
+       - Ative GitHub Pages em Settings > Pages > Branch: main.
+       - Seu portfólio estará em https://seu-usuario.github.io/portfolio
+
+    4. FORMULÁRIO DE CONTATO
+       - O formulário usa Formspree. Substitua o action do <form>
+         pelo seu endpoint Formspree (busque por "FORMSPREE").
+         Cadastre-se gratuitamente em https://formspree.io
+    ============================================================
+    -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --blue-900: #0d1b2a;
+            --blue-800: #1b2838;
+            --blue-700: #1a3a5c;
+            --blue-600: #1565c0;
+            --blue-500: #1e88e5;
+            --blue-400: #42a5f5;
+            --blue-300: #90caf9;
+            --blue-200: #bbdefb;
+            --blue-100: #e3f2fd;
+            --android-green: #3ddc84;
+            --android-green-dark: #2ecc71;
+            --gray-900: #111827;
+            --gray-800: #1f2937;
+            --gray-700: #374151;
+            --gray-600: #4b5563;
+            --gray-500: #6b7280;
+            --gray-400: #9ca3af;
+            --gray-300: #d1d5db;
+            --gray-200: #e5e7eb;
+            --gray-100: #f3f4f6;
+            --gray-50: #f9fafb;
+            --white: #ffffff;
+            --font-main: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,.12);
+            --shadow-md: 0 4px 20px rgba(0,0,0,.15);
+            --shadow-lg: 0 10px 40px rgba(0,0,0,.2);
+            --shadow-glow: 0 0 30px rgba(30,136,229,.25);
+            --radius: 16px;
+            --transition: .3s cubic-bezier(.4,0,.2,1);
+        }
+
+        /* ===== RESET & BASE ===== */
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+
+        body {
+            font-family: var(--font-main);
+            background: var(--blue-900);
+            color: var(--gray-200);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background:
+                radial-gradient(ellipse 600px 600px at 20% 10%, rgba(30,136,229,.12) 0%, transparent 70%),
+                radial-gradient(ellipse 500px 500px at 80% 80%, rgba(61,220,132,.06) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* ===== NAVBAR ===== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            padding: 0 2rem;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: rgba(13,27,42,.85);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(30,136,229,.15);
+            transition: var(--transition);
+        }
+
+        .navbar.scrolled {
+            background: rgba(13,27,42,.97);
+            box-shadow: 0 4px 30px rgba(0,0,0,.3);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: .6rem;
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--white);
+            text-decoration: none;
+        }
+
+        .nav-logo .android-icon {
+            color: var(--android-green);
+            font-size: 1.5rem;
+        }
+
+        .nav-logo span { color: var(--blue-400); }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: .5rem;
+        }
+
+        .nav-links a {
+            color: var(--white);
+            text-decoration: none;
+            font-size: .9rem;
+            font-weight: 500;
+            padding: .5rem 1rem;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--blue-400);
+            background: rgba(30,136,229,.1);
+        }
+
+        .nav-toggle {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--white);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            z-index: 1;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 100px 2rem 4rem;
+        }
+
+        .hero-container {
+            max-width: 1100px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            gap: 4rem;
+        }
+
+        .hero-text { flex: 1; }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .4rem 1rem;
+            background: rgba(61,220,132,.1);
+            border: 1px solid rgba(61,220,132,.3);
+            border-radius: 50px;
+            font-size: .8rem;
+            font-weight: 600;
+            color: var(--android-green);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-badge i { font-size: .7rem; }
+
+        .hero-title {
+            font-size: clamp(2.2rem, 5vw, 3.5rem);
+            font-weight: 900;
+            color: var(--white);
+            line-height: 1.15;
+            margin-bottom: 1rem;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--blue-400), var(--android-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--gray-400);
+            margin-bottom: 2rem;
+            max-width: 500px;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: .5rem;
+            padding: .85rem 1.8rem;
+            border-radius: 12px;
+            font-size: .95rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            border: none;
+            transition: var(--transition);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+            color: var(--white);
+            box-shadow: 0 4px 15px rgba(30,136,229,.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(30,136,229,.5);
+        }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--blue-400);
+            border: 2px solid rgba(30,136,229,.4);
+        }
+
+        .btn-outline:hover {
+            background: rgba(30,136,229,.1);
+            border-color: var(--blue-400);
+            transform: translateY(-2px);
+        }
+
+        /* Hero Avatar */
+        .hero-visual {
+            flex-shrink: 0;
+            position: relative;
+        }
+
+        .avatar-ring {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--blue-500), var(--android-green));
+            padding: 4px;
+            position: relative;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .avatar-ring::before {
+            content: '';
+            position: absolute;
+            inset: -8px;
+            border-radius: 50%;
+            border: 2px dashed rgba(30,136,229,.3);
+            animation: spin 20s linear infinite;
+        }
+
+        @keyframes float { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        .avatar-inner {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--blue-800);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .avatar-inner .initials {
+            font-size: 4rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--blue-400), var(--android-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Floating Android icons */
+        .floating-icon {
+            position: absolute;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .floating-icon:nth-child(2) { top: -10px; right: 20px; animation-delay: -1s; }
+        .floating-icon:nth-child(3) { bottom: 10px; left: -20px; animation-delay: -2s; }
+        .floating-icon:nth-child(4) { bottom: -10px; right: -10px; animation-delay: -0.5s; }
+
+        .floating-icon .icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .icon-kotlin { background: rgba(127,83,209,.2); color: #7f53d1; border: 1px solid rgba(127,83,209,.3); }
+        .icon-java { background: rgba(30,136,229,.2); color: var(--blue-400); border: 1px solid rgba(30,136,229,.3); }
+        .icon-android { background: rgba(61,220,132,.2); color: var(--android-green); border: 1px solid rgba(61,220,132,.3); }
+
+        /* ===== SECTIONS ===== */
+        section {
+            position: relative;
+            z-index: 1;
+            padding: 5rem 2rem;
+        }
+
+        .section-container {
+            max-width: 1100px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 3.5rem;
+        }
+
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-family: var(--font-mono);
+            font-size: .8rem;
+            color: var(--blue-400);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: .6rem;
+        }
+
+        .section-title {
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .section-line {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue-500), var(--android-green));
+            border-radius: 2px;
+            margin: 1rem auto 0;
+        }
+
+        /* ===== ABOUT ===== */
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .about-text p {
+            color: var(--gray-400);
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+        }
+
+        .about-text p strong { color: var(--white); }
+
+        .info-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .info-card {
+            background: rgba(31,41,55,.6);
+            border: 1px solid rgba(55,65,81,.5);
+            border-radius: 14px;
+            padding: 1.3rem;
+            text-align: center;
+            transition: var(--transition);
+        }
+
+        .info-card:hover {
+            border-color: rgba(30,136,229,.4);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .info-card .card-icon {
+            font-size: 1.6rem;
+            margin-bottom: .6rem;
+        }
+
+        .info-card .card-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--white);
+        }
+
+        .info-card .card-label {
+            font-size: .8rem;
+            color: var(--gray-500);
+            margin-top: .2rem;
+        }
+
+        /* ===== EXPERIENCE ===== */
+        .timeline {
+            position: relative;
+            padding-left: 2.5rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--blue-500), var(--android-green), transparent);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2.5rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.65rem;
+            top: .6rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--blue-500);
+            border: 3px solid var(--blue-900);
+            box-shadow: 0 0 10px rgba(30,136,229,.5);
+        }
+
+        .timeline-item:first-child::before {
+            background: var(--android-green);
+            box-shadow: 0 0 10px rgba(61,220,132,.5);
+        }
+
+        .timeline-card {
+            background: rgba(31,41,55,.5);
+            border: 1px solid rgba(55,65,81,.5);
+            border-radius: var(--radius);
+            padding: 1.5rem 1.8rem;
+            transition: var(--transition);
+        }
+
+        .timeline-card:hover {
+            border-color: rgba(30,136,229,.3);
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-period {
+            display: inline-flex;
+            align-items: center;
+            gap: .4rem;
+            font-family: var(--font-mono);
+            font-size: .78rem;
+            color: var(--blue-400);
+            background: rgba(30,136,229,.1);
+            padding: .25rem .8rem;
+            border-radius: 6px;
+            margin-bottom: .6rem;
+        }
+
+        .timeline-role {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: .2rem;
+        }
+
+        .timeline-company {
+            font-size: .95rem;
+            color: var(--android-green);
+            font-weight: 600;
+            margin-bottom: .7rem;
+        }
+
+        .timeline-desc {
+            color: var(--gray-400);
+            font-size: .92rem;
+            line-height: 1.8;
+        }
+
+        .timeline-desc ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-desc li {
+            position: relative;
+            padding-left: 1.3rem;
+            margin-bottom: .3rem;
+        }
+
+        .timeline-desc li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--blue-400);
+            font-weight: 700;
+        }
+
+        /* ===== EDUCATION ===== */
+        .edu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .edu-card {
+            background: rgba(31,41,55,.5);
+            border: 1px solid rgba(55,65,81,.5);
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .edu-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue-500), var(--android-green));
+        }
+
+        .edu-card:hover {
+            border-color: rgba(30,136,229,.3);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .edu-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+        }
+
+        .edu-icon.grad { background: rgba(30,136,229,.15); color: var(--blue-400); }
+        .edu-icon.post { background: rgba(61,220,132,.15); color: var(--android-green); }
+
+        .edu-degree {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: .3rem;
+        }
+
+        .edu-school {
+            font-size: .95rem;
+            color: var(--blue-300);
+            margin-bottom: .6rem;
+        }
+
+        .edu-period {
+            font-family: var(--font-mono);
+            font-size: .8rem;
+            color: var(--gray-500);
+        }
+
+        .edu-status {
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+            margin-top: .6rem;
+            padding: .25rem .7rem;
+            border-radius: 6px;
+            font-size: .78rem;
+            font-weight: 600;
+        }
+
+        .status-done { background: rgba(61,220,132,.15); color: var(--android-green); }
+
+        /* ===== SKILLS ===== */
+        .skills-wrapper {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-category {
+            background: rgba(31,41,55,.5);
+            border: 1px solid rgba(55,65,81,.5);
+            border-radius: var(--radius);
+            padding: 1.8rem;
+            transition: var(--transition);
+        }
+
+        .skill-category:hover {
+            border-color: rgba(30,136,229,.3);
+            box-shadow: var(--shadow-md);
+        }
+
+        .skill-cat-header {
+            display: flex;
+            align-items: center;
+            gap: .7rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .skill-cat-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .skill-cat-name {
+            font-weight: 700;
+            color: var(--white);
+            font-size: 1.05rem;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .5rem;
+        }
+
+        .skill-tag {
+            padding: .35rem .9rem;
+            border-radius: 8px;
+            font-size: .82rem;
+            font-weight: 500;
+            background: rgba(30,136,229,.1);
+            color: var(--blue-300);
+            border: 1px solid rgba(30,136,229,.2);
+            transition: var(--transition);
+        }
+
+        .skill-tag:hover {
+            background: rgba(30,136,229,.2);
+            border-color: var(--blue-400);
+            transform: translateY(-1px);
+        }
+
+        .skill-tag.highlight-tag {
+            background: rgba(61,220,132,.1);
+            color: var(--android-green);
+            border-color: rgba(61,220,132,.25);
+        }
+
+        .skill-tag.highlight-tag:hover {
+            background: rgba(61,220,132,.2);
+            border-color: var(--android-green);
+        }
+
+        /* ===== PROJECTS ===== */
+        /* PROJECTS-SECTION */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .project-card {
+            background: rgba(31,41,55,.5);
+            border: 1px solid rgba(55,65,81,.5);
+            border-radius: var(--radius);
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--blue-500), var(--android-green));
+            opacity: 0;
+            transition: var(--transition);
+        }
+
+        .project-card:hover {
+            border-color: rgba(30,136,229,.3);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .project-card:hover::after { opacity: 1; }
+
+        .project-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: rgba(30,136,229,.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            color: var(--blue-400);
+            margin-bottom: 1.2rem;
+        }
+
+        .project-title {
+            font-size: 1.15rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: .5rem;
+        }
+
+        .project-desc {
+            color: var(--gray-400);
+            font-size: .9rem;
+            margin-bottom: 1rem;
+            line-height: 1.7;
+        }
+
+        .project-tech {
+            display: flex;
+            flex-wrap: wrap;
+            gap: .4rem;
+            margin-bottom: 1.2rem;
+        }
+
+        .project-tech span {
+            font-family: var(--font-mono);
+            font-size: .72rem;
+            padding: .2rem .6rem;
+            border-radius: 5px;
+            background: rgba(30,136,229,.08);
+            color: var(--blue-300);
+            border: 1px solid rgba(30,136,229,.15);
+        }
+
+        .project-links {
+            display: flex;
+            gap: .8rem;
+        }
+
+        .project-links a {
+            color: var(--gray-400);
+            font-size: 1.1rem;
+            transition: var(--transition);
+        }
+
+        .project-links a:hover { color: var(--blue-400); }
+
+        /* Featured project card highlight */
+        .project-card.featured {
+            border-color: rgba(61,220,132,.3);
+            background: rgba(31,41,55,.65);
+        }
+
+        .project-card.featured::after {
+            opacity: 1;
+            background: linear-gradient(90deg, var(--android-green), var(--blue-400));
+        }
+
+        /* Tech badge highlight (for mobile/flutter) */
+        .project-tech .tech-highlight {
+            background: rgba(61,220,132,.12);
+            color: var(--android-green);
+            border-color: rgba(61,220,132,.25);
+        }
+
+        /* Project metadata (date, stars) */
+        .project-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-date {
+            font-family: var(--font-mono);
+            font-size: .75rem;
+            color: var(--gray-500);
+            display: inline-flex;
+            align-items: center;
+            gap: .35rem;
+        }
+
+        .project-stars {
+            font-family: var(--font-mono);
+            font-size: .75rem;
+            color: #fbbf24;
+            display: inline-flex;
+            align-items: center;
+            gap: .3rem;
+        }
+
+        .projects-cta {
+            text-align: center;
+            margin-top: 2.5rem;
+        }
+
+        .projects-cta p {
+            color: var(--gray-500);
+            font-size: .9rem;
+        }
+
+        /* ===== CONTACT ===== */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 3rem;
+            align-items: start;
+        }
+
+        .contact-info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon-box {
+            width: 48px;
+            height: 48px;
+            border-radius: 12px;
+            background: rgba(30,136,229,.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--blue-400);
+            flex-shrink: 0;
+        }
+
+        .contact-info-label {
+            font-size: .8rem;
+            color: var(--gray-500);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: .1rem;
+        }
+
+        .contact-info-value {
+            font-size: 1rem;
+            color: var(--white);
+            font-weight: 500;
+        }
+
+        .contact-info-value a {
+            color: var(--blue-400);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .contact-info-value a:hover { color: var(--blue-300); }
+
+        .social-links {
+            display: flex;
+            gap: .8rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-link {
+            width: 46px;
+            height: 46px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+            color: var(--gray-400);
+            background: rgba(31,41,55,.8);
+            border: 1px solid rgba(55,65,81,.5);
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .social-link:hover {
+            color: var(--white);
+            border-color: var(--blue-500);
+            background: rgba(30,136,229,.15);
+            transform: translateY(-3px);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: rgba(31,41,55,.5);
+            border: 1px solid rgba(55,65,81,.5);
+            border-radius: var(--radius);
+            padding: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: .85rem;
+            font-weight: 600;
+            color: var(--gray-300);
+            margin-bottom: .4rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: .8rem 1rem;
+            border-radius: 10px;
+            border: 1px solid rgba(55,65,81,.8);
+            background: rgba(17,24,39,.6);
+            color: var(--white);
+            font-family: var(--font-main);
+            font-size: .95rem;
+            transition: var(--transition);
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: var(--blue-500);
+            box-shadow: 0 0 0 3px rgba(30,136,229,.15);
+        }
+
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        .form-submit {
+            width: 100%;
+            padding: .9rem;
+            border-radius: 12px;
+            border: none;
+            background: linear-gradient(135deg, var(--blue-600), var(--blue-500));
+            color: var(--white);
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .form-submit:hover {
+            box-shadow: 0 6px 20px rgba(30,136,229,.4);
+            transform: translateY(-2px);
+        }
+
+        /* ===== FOOTER ===== */
+        .footer {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            padding: 2.5rem 2rem;
+            border-top: 1px solid rgba(55,65,81,.3);
+        }
+
+        .footer p {
+            color: var(--gray-500);
+            font-size: .85rem;
+        }
+
+        .footer .heart { color: var(--blue-400); }
+
+        .footer .android-sm { color: var(--android-green); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 900px) {
+            .hero-container { flex-direction: column-reverse; text-align: center; gap: 2rem; }
+            .hero-subtitle { margin: 0 auto 2rem; }
+            .hero-buttons { justify-content: center; }
+            .avatar-ring { width: 200px; height: 200px; }
+            .avatar-inner .initials { font-size: 3rem; }
+            .about-grid { grid-template-columns: 1fr; }
+            .contact-grid { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 700px) {
+            section { padding: 3.5rem 1.2rem; }
+            .nav-links { display: none; }
+            .nav-links.open {
+                display: flex;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0; right: 0;
+                background: rgba(13,27,42,.97);
+                padding: 1rem;
+                border-bottom: 1px solid rgba(30,136,229,.15);
+                backdrop-filter: blur(20px);
+            }
+            .nav-toggle { display: block; }
+            .floating-icon { display: none; }
+            .info-cards { grid-template-columns: 1fr 1fr; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-wrapper { grid-template-columns: 1fr; }
+            .edu-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ===== SCROLL ANIMATIONS ===== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav class="navbar" id="navbar">
+        <a href="#hero" class="nav-logo">
+            <i class="fa-brands fa-android android-icon"></i>
+            Davi<span>.dev</span>
+        </a>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#about">Sobre</a></li>
+            <li><a href="#experience">Experiência</a></li>
+            <li><a href="#education">Formação</a></li>
+            <li><a href="#skills">Habilidades</a></li>
+            <li><a href="#projects">Projetos</a></li>
+            <li><a href="#contact">Contato</a></li>
+        </ul>
+        <button class="nav-toggle" id="navToggle" aria-label="Menu">
+            <i class="fa-solid fa-bars"></i>
+        </button>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="hero">
+        <div class="hero-container">
+            <div class="hero-text">
+                <div class="hero-badge">
+                    <i class="fa-solid fa-circle"></i>
+                    Disponível para novos desafios
+                </div>
+                <!-- EDIT: Altere seu nome e título abaixo -->
+                <h1 class="hero-title">
+                    Olá, eu sou<br>
+                    <span class="highlight">Davi Oliveira</span>
+                </h1>
+                <p class="hero-subtitle">
+                    Desenvolvedor Mobile Android especializado em <strong>Kotlin</strong> e <strong>Java</strong>,
+                    criando aplicativos eficientes e de alta qualidade para o ecossistema Android.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#contact" class="btn btn-primary">
+                        <i class="fa-solid fa-paper-plane"></i> Fale Comigo
+                    </a>
+                    <a href="#projects" class="btn btn-outline">
+                        <i class="fa-solid fa-code"></i> Ver Projetos
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="avatar-ring">
+                    <div class="avatar-inner">
+                        <img src="https://avatars.githubusercontent.com/u/48769410?v=4" alt="Davi Oliveira" style="width:100%;height:100%;object-fit:cover;">
+                    </div>
+                </div>
+                <div class="floating-icon" style="top:-10px;right:20px;">
+                    <div class="icon-box icon-kotlin"><i class="fa-solid fa-k"></i></div>
+                </div>
+                <div class="floating-icon" style="bottom:10px;left:-20px;">
+                    <div class="icon-box icon-java"><i class="fa-brands fa-java"></i></div>
+                </div>
+                <div class="floating-icon" style="bottom:-10px;right:-10px;">
+                    <div class="icon-box icon-android"><i class="fa-brands fa-android"></i></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== SOBRE MIM ===== -->
+    <section id="about">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fa-solid fa-user"></i> Sobre Mim</div>
+                <h2 class="section-title">Quem sou eu</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="about-grid">
+                <div class="about-text reveal">
+                    <!-- EDIT: Personalize seu texto de apresentação abaixo -->
+                    <p>
+                        Sou <strong>Davi Henrique Silva de Oliveira</strong>, desenvolvedor mobile com mais de
+                        <strong>5 anos de experiência</strong> na <strong>Gertec Brasil</strong>, empresa referência
+                        em terminais de automação e pagamento para o varejo.
+                    </p>
+                    <p>
+                        Atuo na criação e integração de bibliotecas Android com frameworks de desenvolvimento mobile,
+                        desenvolvimento de exemplos práticos, suporte técnico especializado e treinamento de colaboradores.
+                        Minha paixão é transformar requisitos complexos em soluções elegantes e performáticas para o
+                        ecossistema Android.
+                    </p>
+                    <p>
+                        Pós-graduado em <strong>Gestão Estratégica de TI</strong> pela PUC Minas e graduado em
+                        <strong>Análise e Desenvolvimento de Sistemas</strong> pelo IFSP, combino visão técnica
+                        com pensamento estratégico. Sou fluente em <strong>espanhol</strong> e possuo inglês intermediário,
+                        com disponibilidade para viagens.
+                    </p>
+                </div>
+                <div class="info-cards reveal">
+                    <div class="info-card">
+                        <div class="card-icon">🤖</div>
+                        <div class="card-value">5+</div>
+                        <div class="card-label">Anos na Gertec</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">📱</div>
+                        <div class="card-value">Android</div>
+                        <div class="card-label">Plataforma Principal</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">🎓</div>
+                        <div class="card-value">Pós-Grad</div>
+                        <div class="card-label">Gestão de TI</div>
+                    </div>
+                    <div class="info-card">
+                        <div class="card-icon">🌎</div>
+                        <div class="card-value">3</div>
+                        <div class="card-label">Idiomas</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EXPERIÊNCIA ===== -->
+    <section id="experience">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fa-solid fa-briefcase"></i> Experiência</div>
+                <h2 class="section-title">Trajetória Profissional</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="timeline">
+                <!-- EDIT: Adicione novas experiências copiando um bloco timeline-item -->
+                <div class="timeline-item reveal">
+                    <div class="timeline-card">
+                        <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Mai 2023 — Presente</div>
+                        <div class="timeline-role">Programador de Software</div>
+                        <div class="timeline-company"><i class="fa-solid fa-building"></i> Gertec Brasil Ltda</div>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Desenvolvimento e integração de bibliotecas Android com frameworks mobile</li>
+                                <li>Criação de exemplos práticos personalizados para terminais de automação e pagamento</li>
+                                <li>Suporte técnico especializado para soluções de varejo</li>
+                                <li>Treinamento e capacitação de novos colaboradores</li>
+                                <li>Teste de aplicações e identificação/correção de bugs</li>
+                                <li>Gestão de escala do time de desenvolvedores</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-card">
+                        <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Jun 2022 — Mai 2023</div>
+                        <div class="timeline-role">Analista de Suporte Técnico</div>
+                        <div class="timeline-company"><i class="fa-solid fa-building"></i> Gertec Brasil Ltda</div>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Suporte técnico avançado para equipamentos de automação</li>
+                                <li>Resolução de chamados e atendimento ao cliente</li>
+                                <li>Criação de artigos técnicos e documentação</li>
+                                <li>Teste de equipamentos eletrônicos e software</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-card">
+                        <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Fev 2020 — Jun 2022</div>
+                        <div class="timeline-role">Suporte Técnico</div>
+                        <div class="timeline-company"><i class="fa-solid fa-building"></i> Gertec Brasil Ltda</div>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Suporte interno e externo para clientes e equipes</li>
+                                <li>Atendimento ao cliente e resolução de chamados técnicos</li>
+                                <li>Treinamento de equipamentos, processos e procedimentos</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-card">
+                        <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Ago 2018 — Ago 2019</div>
+                        <div class="timeline-role">Atendimento ao Cliente</div>
+                        <div class="timeline-company"><i class="fa-solid fa-building"></i> Atento</div>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Atendimento e suporte ao cliente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-card">
+                        <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Out 2016 — Fev 2018</div>
+                        <div class="timeline-role">Atendimento ao Cliente</div>
+                        <div class="timeline-company"><i class="fa-solid fa-building"></i> SERCOM S.A.</div>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Atendimento e suporte ao cliente</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-card">
+                        <div class="timeline-period"><i class="fa-regular fa-calendar"></i> Ago 2011 — Jul 2014</div>
+                        <div class="timeline-role">Auxiliar Administrativo</div>
+                        <div class="timeline-company"><i class="fa-solid fa-building"></i> FBS Construtora</div>
+                        <div class="timeline-desc">
+                            <ul>
+                                <li>Suporte administrativo e organizacional</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FORMAÇÃO ===== -->
+    <section id="education">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fa-solid fa-graduation-cap"></i> Formação</div>
+                <h2 class="section-title">Formação Acadêmica</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="edu-grid">
+                <div class="edu-card reveal">
+                    <div class="edu-icon post"><i class="fa-solid fa-award"></i></div>
+                    <div class="edu-degree">Pós-graduação Lato Sensu</div>
+                    <div class="edu-school">Gestão Estratégica de TI — Pontifícia Universidade Católica de Minas Gerais (PUC Minas)</div>
+                    <div class="edu-period">Nov 2024 — Nov 2025</div>
+                    <div class="edu-status status-done"><i class="fa-solid fa-check-circle"></i> Concluída</div>
+                </div>
+                <div class="edu-card reveal">
+                    <div class="edu-icon grad"><i class="fa-solid fa-laptop-code"></i></div>
+                    <div class="edu-degree">Tecnologia em Análise e Desenvolvimento de Sistemas</div>
+                    <div class="edu-school">Instituto Federal de Educação, Ciência e Tecnologia de São Paulo — IFSP</div>
+                    <div class="edu-period">2018 — Jul 2023</div>
+                    <div class="edu-status status-done"><i class="fa-solid fa-check-circle"></i> Concluída</div>
+                </div>
+            </div>
+
+            <!-- Certificações -->
+            <div style="margin-top:2.5rem;">
+                <h3 style="color:var(--white);font-size:1.2rem;font-weight:700;margin-bottom:1rem;text-align:center;" class="reveal">
+                    Certificações
+                </h3>
+                <div style="display:flex;justify-content:center;gap:1rem;flex-wrap:wrap;" class="reveal">
+                    <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.2rem;border-radius:10px;background:rgba(30,136,229,.1);border:1px solid rgba(30,136,229,.25);color:var(--blue-300);font-weight:600;font-size:.9rem;">
+                        <i class="fa-solid fa-certificate"></i> IA na Prática
+                    </div>
+                    <div style="display:inline-flex;align-items:center;gap:.5rem;padding:.5rem 1.2rem;border-radius:10px;background:rgba(30,136,229,.1);border:1px solid rgba(30,136,229,.25);color:var(--blue-300);font-weight:600;font-size:.9rem;">
+                        <i class="fa-solid fa-certificate"></i> Curso de Java
+                    </div>
+                    <!-- EDIT: Adicione mais certificações copiando o bloco <div> acima -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== HABILIDADES ===== -->
+    <section id="skills">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fa-solid fa-code"></i> Habilidades</div>
+                <h2 class="section-title">Stack Técnica</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="skills-wrapper">
+                <div class="skill-category reveal">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon" style="background:rgba(61,220,132,.15);color:var(--android-green);">
+                            <i class="fa-brands fa-android"></i>
+                        </div>
+                        <span class="skill-cat-name">Mobile Development</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag highlight-tag">Kotlin</span>
+                        <span class="skill-tag highlight-tag">Java</span>
+                        <span class="skill-tag highlight-tag">Android SDK</span>
+                        <span class="skill-tag">Flutter</span>
+                        <span class="skill-tag">Jetpack</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon" style="background:rgba(30,136,229,.15);color:var(--blue-400);">
+                            <i class="fa-solid fa-laptop-code"></i>
+                        </div>
+                        <span class="skill-cat-name">Linguagens</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">C</span>
+                        <span class="skill-tag">C#</span>
+                        <span class="skill-tag">C++</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">HTML</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon" style="background:rgba(127,83,209,.15);color:#a78bfa;">
+                            <i class="fa-solid fa-database"></i>
+                        </div>
+                        <span class="skill-cat-name">Banco de Dados</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">SQL</span>
+                        <span class="skill-tag">MySQL</span>
+                        <span class="skill-tag">PostgreSQL</span>
+                        <span class="skill-tag">SQLite</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon" style="background:rgba(251,191,36,.15);color:#fbbf24;">
+                            <i class="fa-solid fa-tools"></i>
+                        </div>
+                        <span class="skill-cat-name">Ferramentas & OS</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Android Studio</span>
+                        <span class="skill-tag">Git</span>
+                        <span class="skill-tag">Linux</span>
+                        <span class="skill-tag">Windows</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon" style="background:rgba(239,68,68,.15);color:#f87171;">
+                            <i class="fa-solid fa-globe"></i>
+                        </div>
+                        <span class="skill-cat-name">Idiomas</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Português — Nativo</span>
+                        <span class="skill-tag highlight-tag">Espanhol — Fluente</span>
+                        <span class="skill-tag">Inglês — Intermediário</span>
+                    </div>
+                </div>
+
+                <div class="skill-category reveal">
+                    <div class="skill-cat-header">
+                        <div class="skill-cat-icon" style="background:rgba(20,184,166,.15);color:#2dd4bf;">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <span class="skill-cat-name">Soft Skills</span>
+                    </div>
+                    <div class="skill-tags">
+                        <span class="skill-tag">Treinamento</span>
+                        <span class="skill-tag">Suporte Técnico</span>
+                        <span class="skill-tag">Gestão de Equipes</span>
+                        <span class="skill-tag">Atendimento ao Cliente</span>
+                        <span class="skill-tag">Voluntariado</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== PROJETOS ===== -->
+    <!--
+    ============================================================
+    PROJETOS IMPORTADOS AUTOMATICAMENTE DO GITHUB
+    ============================================================
+    Os projetos abaixo foram importados automaticamente a partir
+    dos repositórios públicos do GitHub do usuário (Davih21 / DHTCSISTEMAS).
+    Última importação: 2026-03-16
+
+    VOCÊ PODE EDITÁ-LOS MANUALMENTE se desejar:
+    - Adicionar descrições mais detalhadas
+    - Incluir screenshots ou GIFs demonstrativos
+    - Destacar projetos específicos com classes CSS
+    - Adicionar links para demos ou Google Play
+    - Reordenar os cards conforme preferência
+
+    Para destacar um projeto, adicione a classe "featured" ao
+    div.project-card (ex: class="project-card featured reveal").
+    ============================================================
+    -->
+    <section id="projects">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fa-solid fa-rocket"></i> Projetos</div>
+                <h2 class="section-title">Meus Projetos</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="projects-grid">
+
+                <!-- ★ DESTAQUE: Pokedex_Flutter — Projeto Mobile/Flutter -->
+                <div class="project-card featured reveal">
+                    <div class="project-icon" style="background:rgba(61,220,132,.15);color:var(--android-green);">
+                        <i class="fa-solid fa-mobile-screen"></i>
+                    </div>
+                    <div class="project-title">Pokedex Flutter</div>
+                    <div class="project-desc">
+                        Pokédex construída com Flutter/Dart — aplicativo mobile multiplataforma
+                        que consome a PokéAPI para exibir informações detalhadas dos Pokémon
+                        com interface moderna e responsiva.
+                    </div>
+                    <div class="project-tech">
+                        <span class="tech-highlight">Dart</span>
+                        <span class="tech-highlight">Flutter</span>
+                        <span>Mobile</span>
+                        <span>API REST</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Jan 2024</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Davih21/Pokedex_Flutter" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- MyVideoFlix -->
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fa-solid fa-film"></i></div>
+                    <div class="project-title">MyVideoFlix</div>
+                    <div class="project-desc">
+                        Aplicativo de streaming de vídeos desenvolvido em Java — catálogo de
+                        filmes e séries com interface intuitiva inspirada nas grandes plataformas
+                        de entretenimento digital.
+                    </div>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>Android</span>
+                        <span>Streaming</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Jun 2025</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Davih21/MyVideoFlix" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- MyDelivery -->
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fa-solid fa-truck-fast"></i></div>
+                    <div class="project-title">MyDelivery</div>
+                    <div class="project-desc">
+                        Sistema de delivery desenvolvido em Java — gerenciamento de pedidos,
+                        entregas e acompanhamento em tempo real, simulando um app de
+                        entrega completo.
+                    </div>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>Android</span>
+                        <span>Delivery</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Mai 2025</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Davih21/MyDelivery" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Emprestimo de Livros -->
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fa-solid fa-book-open"></i></div>
+                    <div class="project-title">Empréstimo de Livros</div>
+                    <div class="project-desc">
+                        Sistema de gerenciamento de empréstimos de livros em Java —
+                        controle de acervo, cadastro de usuários e registro de empréstimos
+                        e devoluções com lógica de negócios.
+                    </div>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>CRUD</span>
+                        <span>Gestão</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Mai 2025</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Davih21/Emprestimo-de-livros" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Banco Teste 
+                <div class="project-card reveal">
+                    <div class="project-icon" style="background:rgba(127,83,209,.15);color:#a78bfa;">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+                    <div class="project-title">Banco Teste</div>
+                    <div class="project-desc">
+                        Projeto de banco de dados para testes — ambiente de experimentação
+                        e validação de queries, modelagem de dados e operações CRUD
+                        para desenvolvimento de aplicações.
+                    </div>
+                    <div class="project-tech">
+                        <span>SQL</span>
+                        <span>Database</span>
+                        <span>Testes</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Nov 2025</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/DHTCSISTEMAS/bancoteste" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                -->
+
+                <!-- Projeto Estacionamento 
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fa-solid fa-square-parking"></i></div>
+                    <div class="project-title">Projeto Estacionamento</div>
+                    <div class="project-desc">
+                        Sistema de gestão de estacionamento em Java — controle de entrada
+                        e saída de veículos, cálculo de tarifas e gerenciamento de vagas
+                        disponíveis.
+                    </div>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>Gestão</span>
+                        <span>CRUD</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Jan 2025</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/DHTCSISTEMAS/ProjetoEstacionamento" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                -->
+
+                <!-- Projeto de Avião 
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fa-solid fa-plane"></i></div>
+                    <div class="project-title">Projeto de Avião</div>
+                    <div class="project-desc">
+                        Sistema de gerenciamento aéreo em Java — reservas de voos,
+                        controle de passageiros e simulação de operações de uma
+                        companhia aérea.
+                    </div>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>Simulação</span>
+                        <span>OOP</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Dez 2024</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/DHTCSISTEMAS/Projeto-de-aviao" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+                -->
+
+                <!-- Calculadora com Média -->
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fa-solid fa-calculator"></i></div>
+                    <div class="project-title">Calculadora com Média</div>
+                    <div class="project-desc">
+                        Calculadora em Java com funcionalidade de cálculo de médias —
+                        ferramenta prática para operações matemáticas e cálculos
+                        de médias aritméticas com interface simples.
+                    </div>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>Matemática</span>
+                        <span>Utilidade</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Jul 2024</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Davih21/Calculadora-com-media" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+                <!-- Todo List -->
+                <div class="project-card reveal">
+                    <div class="project-icon"><i class="fa-solid fa-list-check"></i></div>
+                    <div class="project-title">Todo List</div>
+                    <div class="project-desc">
+                        Aplicação de lista de tarefas em Java — gerenciamento de
+                        atividades com funcionalidades de criar, editar, marcar como
+                        concluída e excluir tarefas.
+                    </div>
+                    <div class="project-tech">
+                        <span>Java</span>
+                        <span>CRUD</span>
+                        <span>Produtividade</span>
+                    </div>
+                    <div class="project-meta">
+                        <span class="project-date"><i class="fa-regular fa-calendar"></i> Nov 2023</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://github.com/Davih21/todolist" target="_blank" title="Ver no GitHub"><i class="fa-brands fa-github"></i></a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="projects-cta reveal">
+                <a href="https://github.com/Davih21" target="_blank" class="btn btn-outline" style="margin-bottom:.8rem;">
+                    <i class="fa-brands fa-github"></i> Ver todos no GitHub
+                </a>
+                <p><i class="fa-solid fa-code-branch"></i> 6 repositórios públicos — acompanhe meu trabalho!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== CONTATO ===== -->
+    <section id="contact">
+        <div class="section-container">
+            <div class="section-header reveal">
+                <div class="section-label"><i class="fa-solid fa-envelope"></i> Contato</div>
+                <h2 class="section-title">Vamos Conversar?</h2>
+                <div class="section-line"></div>
+            </div>
+            <div class="contact-grid">
+                <div class="reveal">
+                    <div class="contact-info-item">
+                        <div class="contact-icon-box"><i class="fa-solid fa-envelope"></i></div>
+                        <div>
+                            <div class="contact-info-label">E-mail</div>
+                            <!-- EDIT: Seu e-mail -->
+                            <div class="contact-info-value"><a href="mailto:davih.dh@gmail.com">davih.dh@gmail.com</a></div>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon-box"><i class="fa-solid fa-phone"></i></div>
+                        <div>
+                            <div class="contact-info-label">Telefone</div>
+                            <!-- EDIT: Seu telefone -->
+                            <div class="contact-info-value"><a href="tel:+5511949216091">(11) 94921-6091</a></div>
+                        </div>
+                    </div>
+                    <div class="contact-info-item">
+                        <div class="contact-icon-box"><i class="fa-solid fa-location-dot"></i></div>
+                        <div>
+                            <div class="contact-info-label">Localização</div>
+                            <!-- EDIT: Sua localização -->
+                            <div class="contact-info-value">São Paulo, SP — Brasil</div>
+                        </div>
+                    </div>
+
+                    <!-- EDIT: Adicione/atualize seus links de redes sociais abaixo -->
+                    <div class="social-links">
+                        <a href="https://www.linkedin.com/in/davihenriquesilvadeoliveira" target="_blank" class="social-link" title="LinkedIn">
+                            <i class="fa-brands fa-linkedin-in"></i>
+                        </a>
+                        <a href="https://github.com/Davih21" target="_blank" class="social-link" title="GitHub">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+                        <a href="mailto:davih.dh@gmail.com" class="social-link" title="E-mail">
+                            <i class="fa-solid fa-envelope"></i>
+                        </a>
+                        <!--
+                        EDIT: Adicione mais redes sociais copiando o modelo abaixo:
+                        <a href="https://twitter.com/seuusuario" target="_blank" class="social-link" title="Twitter">
+                            <i class="fa-brands fa-x-twitter"></i>
+                        </a>
+                        -->
+                    </div>
+                </div>
+
+                <!-- FORMULÁRIO DE CONTATO
+                     FORMSPREE: Substitua a URL no action do form pelo seu endpoint.
+                     1. Acesse https://formspree.io e crie uma conta gratuita
+                     2. Crie um novo form e copie o endpoint
+                     3. Cole no atributo action abaixo
+                     Ex: action="https://formspree.io/f/xyzabc12"
+                -->
+                <form class="contact-form reveal" action="https://formspree.io/f/SEU_ID_AQUI" method="POST">
+                    <div class="form-group">
+                        <label for="name">Nome</label>
+                        <input type="text" id="name" name="name" placeholder="Seu nome completo" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">E-mail</label>
+                        <input type="email" id="email" name="_replyto" placeholder="seuemail@exemplo.com" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject">Assunto</label>
+                        <input type="text" id="subject" name="subject" placeholder="Assunto da mensagem">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Mensagem</label>
+                        <textarea id="message" name="message" placeholder="Escreva sua mensagem..." required></textarea>
+                    </div>
+                    <button type="submit" class="form-submit">
+                        <i class="fa-solid fa-paper-plane"></i> Enviar Mensagem
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <p>
+            &copy; 2025 Davi Oliveira — Feito com <span class="heart">&hearts;</span> e
+            <i class="fa-brands fa-android android-sm"></i>
+        </p>
+    </footer>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        // Navbar scroll effect
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Mobile menu toggle
+        const navToggle = document.getElementById('navToggle');
+        const navLinks = document.getElementById('navLinks');
+        navToggle.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+            const icon = navToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-xmark');
+        });
+
+        // Close menu on link click
+        navLinks.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('open');
+                const icon = navToggle.querySelector('i');
+                icon.classList.add('fa-bars');
+                icon.classList.remove('fa-xmark');
+            });
+        });
+
+        // Scroll reveal animation
+        const revealElements = document.querySelectorAll('.reveal');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        revealElements.forEach(el => revealObserver.observe(el));
+
+        // Active nav link on scroll
+        const sections = document.querySelectorAll('section[id]');
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY + 100;
+            sections.forEach(section => {
+                const top = section.offsetTop;
+                const height = section.offsetHeight;
+                const id = section.getAttribute('id');
+                const link = document.querySelector(`.nav-links a[href="#${id}"]`);
+                if (link) {
+                    link.classList.toggle('active', scrollY >= top && scrollY < top + height);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
